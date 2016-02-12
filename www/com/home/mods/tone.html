@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<div class="card">
+  <div class="item item-divider">
+    Tone
+  </div>
+</div>
+
+<div class="card idea-tone" ng-repeat="tone_category in home.idea.tone.document_tone.tone_categories">
+  <div class="item item-divider">
+    {{tone_category.category_name}}
+  </div>
+
+  <div class="item" ng-repeat="tone in tone_category.tones">
+    {{tone.tone_name}} : {{tone.score * 100 | number : 2 }} %
+  </div>
+
+  <!-- <div class="item item-text-wrap">
+    {{tone_category}}
+  </div> -->
+
+</div>

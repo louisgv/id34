@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<div class="card">
+  <div class="item item-divider">
+    Personality
+  </div>
+</div>
+
+<!-- <div class="card">
+  <div class="item item-text-wrap">
+    {{home.idea.personality}}
+  </div>
+</div> -->
+
+<div class="card idea-personality" ng-repeat="children in home.idea.personality.tree.children">
+  <div class="item item-divider">
+    {{children.name}}
+  </div>
+  <!-- <div class="item item-divider">
+    {{children}}
+  </div> -->
+  <div ng-repeat="child in children.children">
+    <div class="item item-assertive text-center">
+      {{child.name}} : {{child.percentage * 100 | number : 2 }} %
+    </div>
+    <div ng-repeat="chil in child.children">
+      <div class="item item-dark text-center">
+        {{chil.name}} : {{chil.percentage * 100 | number : 2 }} %
+      </div>
+      <div class="item-group item item-positive">
+        <div ng-repeat="chi in chil.children">
+          <div class="item item-positive">
+            {{chi.name}} : {{chi.percentage * 100 | number : 2 }} %
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

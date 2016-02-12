@@ -2,6 +2,8 @@
 
 var conceptsAPI = "./com/home/db/concepts.json";
 var annotationsAPI = "./com/home/db/annotations.json";
+var personalityAPI = "./com/home/db/personality.json";
+var toneAPI = "./com/home/db/tone.json";
 
 function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
   console.log('HomeCtrl');
@@ -14,7 +16,9 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
     annotations: null, // All keywords extractable
     related: null, // All related concepts, expecting about 30 mores of them
     product: "",
-    market: ""
+    market: "",
+    tone: null,
+    personality: null
   }
 
   home.getRandomIdea = function () {
@@ -51,7 +55,32 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
         function (response) {
           console.log(response.data);
           home.idea.annotations = response.data;
-          home.getRelatedConcepts();
+        },
+        function (err) {
+          console.log(err);
+        }
+      )
+  }
+
+  home.getPersonality = function () {
+    $http.get(personalityAPI)
+      .then(
+        function (response) {
+          console.log(response.data);
+          home.idea.personality = response.data;
+        },
+        function (err) {
+          console.log(err);
+        }
+      )
+  }
+
+  home.getTone = function () {
+    $http.get(toneAPI)
+      .then(
+        function (response) {
+          console.log(response.data);
+          home.idea.tone = response.data;
         },
         function (err) {
           console.log(err);
@@ -72,5 +101,14 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
   }
 
   home.getRandomIdea();
+
+  //* //////////////////////////////////////////////
+
+  home.getAnnotations();
+  home.getRelatedConcepts();
+  home.getTone();
+  home.getPersonality();
+
+  //*/////////////////////////////////////////////
 
 }
