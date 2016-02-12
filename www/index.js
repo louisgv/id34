@@ -7,7 +7,8 @@
 
 angular.module('app', [
     'ionic',
-    'camera'
+    'camera',
+    'chart.js'
   ])
   .config(config)
   .run(run)

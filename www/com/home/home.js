@@ -5,7 +5,7 @@ var annotationsAPI = "./com/home/db/annotations.json";
 var personalityAPI = "./com/home/db/personality.json";
 var toneAPI = "./com/home/db/tone.json";
 
-function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
+function HomeCtrl($scope, $interval, $http, $ionicPopup, $timeout) {
   console.log('HomeCtrl');
 
   var home = this;
@@ -20,9 +20,6 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
     tone: null,
     personality: null
   };
-
-
-
 
   home.getRandomIdea = function () {
     $http.jsonp('http://itsthisforthat.com/api.php?call=JSON_CALLBACK')
@@ -72,7 +69,19 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log("Personality ---------------");
           console.log(response.data.tree.children[0].children[0].children);
           home.idea.personality = response.data;
-          home.pData = response.data.tree.children[0].children[0].children;
+
+          var raw = response.data.tree.children[0].children[0].children;
+
+          $scope.labels = raw.map(function(a) {
+            return a.id;
+          });
+          
+          $scope.data = raw.map(function(a) {
+            if(a.percentage){
+              return a.percentage * 100;
+            }
+          });
+
         },
         function (err) {
           console.log(err);
