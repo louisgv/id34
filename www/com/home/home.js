@@ -18,7 +18,7 @@ function HomeCtrl($scope, $interval, $http, $ionicPopup, $timeout) {
   $scope.getRandomIdea = function () {
     $http({
         method: 'GET',
-        url: 'http://itsthisforthat.com/api.php?json'
+        url: 'http://itsthisforthat.com/api.php?text'
       })
       .then(function successCallback(response) {
         // this callback will be called asynchronously
