@@ -9093,6 +9093,11 @@ a.button {
   color: white;
   background: white; }
 
+.home .item-group {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around; }
+
 textarea {
   resize: vertical;
   /*will prevent resizing horizontally*/

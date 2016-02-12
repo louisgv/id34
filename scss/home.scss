@@ -4,4 +4,10 @@
     background: white;
   }
 
+  .item-group {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    // background: white;
+  }
 }
