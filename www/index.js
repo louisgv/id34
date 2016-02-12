@@ -22,7 +22,7 @@ function config($stateProvider, $urlRouterProvider) {
   $stateProvider.state('home', {
       url: '/',
       templateUrl: 'com/home/home.html',
-      controller: 'HomeCtrl'
+      controller: 'HomeCtrl as home'
     });
   // .state('app.deal', {
   //   url: '/deallists/:dealId',

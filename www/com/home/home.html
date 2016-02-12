@@ -5,16 +5,30 @@
   </ion-nav-title>
 
   <ion-content class="has-header app-bg">
-    <div class="list list-inset">
-      <label class="item item-input">
-        <input type="text" placeholder="It's basically a really great idea" ng-model="idea">
+
+    <div class="list item-input-inset">
+      <label class="item item-input item-input-wrapper">
+        <span class="input-label">The idea is :</span>
+        <input type="text" placeholder="So, like, it's basically a..." ng-model="home.idea">
       </label>
 
-      <button class="button button-full" ng-click="getRandomIdea()">
-        Get A Random Idea
+      <button class="button button-dark" ng-click="home.getRandomIdea()">
+        <i class="icon ion-help-buoy"></i>
+        Get Random
       </button>
     </div>
 
+    <button class="button button-full button-dark">
+      <i class="icon ion-alert-circled"></i>
+      ROAST IT!
+      <i class="icon ion-alert-circled"></i>
+    </button>
+
+    <div class="idea-info">
+
+
+
+    </div>
 
 
   </ion-content>

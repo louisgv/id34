@@ -25,9 +25,12 @@ $ionicons-font-path: '../lib/ionic/fonts' !default;
 // Global Rules here:
 
 .app-bg {
-  background: url(../assets/img/bg.png);
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: #BA8B02; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #BA8B02 , #181818); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #BA8B02 , #181818); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  // background-size: cover;
+  // background-repeat: no-repeat;
 }
 
 .full-width {
@@ -58,36 +61,4 @@ a {
     height: 90%;
   }
 
-}
-
-.sign {
-  width: 100%;
-}
-
-.button.button-balanced {
-  margin-top: 100px;
-  margin-left: 94%;
-}
-
-.bar-dark .button {
-  background-color: green;
-}
-
-.bar-dark .button.button-clear {
-  color: black;
-}
-.bar.bar-dark {
-  background-color: white;
-  border-bottom: 5px solid rgba(54,54,54,.2);
-  height: 50px;
-}
-
-.bar.bar-dark .title {
-  color: black;
-}
-
-.button.button-dark {
-  background-color: #2ECC71;
-  border-color: transparent;
-  border-radius: 100px;
 }
