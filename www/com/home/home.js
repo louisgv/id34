@@ -19,7 +19,10 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
     market: "",
     tone: null,
     personality: null
-  }
+  };
+
+
+
 
   home.getRandomIdea = function () {
     $http.jsonp('http://itsthisforthat.com/api.php?call=JSON_CALLBACK')
@@ -32,7 +35,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
         home.idea.raw = "So, Basically, It's Like A " + data.this + " for " + data.that + ".";
         console.log(home.idea.raw);
       });
-  }
+  };
 
   home.getRelatedConcepts = function () {
     // $http.get('https://id34.mybluemix.net/a/' + home.idea.raw)
@@ -46,7 +49,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log(err);
         }
       )
-  }
+  };
 
   home.getAnnotations = function () {
     // $http.get('https://id34.mybluemix.net/a/' + home.idea.raw)
@@ -60,20 +63,22 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log(err);
         }
       )
-  }
+  };
 
   home.getPersonality = function () {
     $http.get(personalityAPI)
       .then(
         function (response) {
-          console.log(response.data);
+          console.log("Personality ---------------");
+          console.log(response.data.tree.children[0].children[0].children);
           home.idea.personality = response.data;
+          home.pData = response.data.tree.children[0].children[0].children;
         },
         function (err) {
           console.log(err);
         }
       )
-  }
+  };
 
   home.getTone = function () {
     $http.get(toneAPI)
@@ -86,7 +91,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log(err);
         }
       )
-  }
+  };
 
   function analyzeIdea() {
     $http.get('https://id34.mybluemix.net/ai/' + home.idea)
