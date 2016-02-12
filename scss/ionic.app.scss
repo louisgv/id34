@@ -28,13 +28,14 @@ textarea {
 
 .app-bg {
 
-  // background: #BA8B02;
+  background: #BA8B02;
   // /* fallback for old browsers */
-  // background: -webkit-linear-gradient(to left, #BA8B02 , #181818);
+  background: -webkit-linear-gradient(to left, #BA8B02 , #181818);
   // /* Chrome 10-25, Safari 5.1-6 */
-  // background: linear-gradient(to left, #BA8B02 , #181818);
+  background: linear-gradient(to left, #BA8B02 , #181818);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-image: url(../assets/img/bg.jpg);
+
+  // background-image: url(../assets/img/bg.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
