@@ -5,7 +5,7 @@ var annotationsAPI = "./com/home/db/annotations.json";
 var personalityAPI = "./com/home/db/personality.json";
 var toneAPI = "./com/home/db/tone.json";
 
-function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
+function HomeCtrl($http) {
   console.log('HomeCtrl');
 
   var home = this;
@@ -19,7 +19,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
     market: "",
     tone: null,
     personality: null
-  }
+  };
 
   home.getRandomIdea = function () {
     $http.jsonp('http://itsthisforthat.com/api.php?call=JSON_CALLBACK')
@@ -32,7 +32,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
         home.idea.raw = "So, Basically, It's Like A " + data.this + " for " + data.that + ".";
         console.log(home.idea.raw);
       });
-  }
+  };
 
   home.getRelatedConcepts = function () {
     // $http.get('https://id34.mybluemix.net/a/' + home.idea.raw)
@@ -46,7 +46,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log(err);
         }
       )
-  }
+  };
 
   home.getAnnotations = function () {
     // $http.get('https://id34.mybluemix.net/a/' + home.idea.raw)
@@ -60,20 +60,34 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log(err);
         }
       )
-  }
+  };
 
   home.getPersonality = function () {
     $http.get(personalityAPI)
       .then(
         function (response) {
-          console.log(response.data);
+          console.log("Personality ---------------");
+          console.log(response.data.tree.children[0].children[0].children);
           home.idea.personality = response.data;
+
+          var raw = response.data.tree.children[0].children[0].children;
+
+          home.labels = raw.map(function(a) {
+            return a.id;
+          });
+
+          home.data = raw.map(function(a) {
+            if(a.percentage){
+              return a.percentage * 100;
+            }
+          });
+
         },
         function (err) {
           console.log(err);
         }
       )
-  }
+  };
 
   home.getTone = function () {
     $http.get(toneAPI)
@@ -86,7 +100,7 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
           console.log(err);
         }
       )
-  }
+  };
 
   function analyzeIdea() {
     $http.get('https://id34.mybluemix.net/ai/' + home.idea)

@@ -38,6 +38,11 @@
 
       <div class="col col-50 responsive-sm" ng-show="home.idea.personality">
         <span ng-include="'com/home/mods/personality.html'"></span>
+        <div class="row">
+          <canvas id="doughnut" class="chart chart-doughnut"
+          chart-data="home.data" chart-labels="home.labels">
+          </canvas>
+        </div>
       </div>
 
       <div class="col col-25 responsive-sm" ng-show="home.idea.tone">
