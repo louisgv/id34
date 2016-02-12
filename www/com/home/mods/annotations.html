@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <div class="card">
-  <div class="item item-divider">
+  <div class="item item-toggle">
     Annotations
+    <label class="toggle toggle-dark">
+      <input type="checkbox" ng-model="show">
+      <div class="track">
+        <div class="handle"></div>
+      </div>
+    </label>
   </div>
 </div>
 
-<div class="card idea-annotations" ng-repeat="entry in home.idea.annotations">
+<div ng-if="show" class="card idea-annotations" ng-repeat="entry in home.idea.annotations">
   <div class="item item-divider">
     {{entry.concept.label}}
   </div>
