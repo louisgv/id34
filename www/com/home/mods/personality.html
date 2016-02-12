@@ -23,11 +23,11 @@
     <div class="item item-assertive text-center">
       {{child.name}} : {{child.percentage * 100 | number : 2 }} %
     </div>
-    <div ng-repeat="chil in child.children">
+    <div ng-repeat="chil in child.children" ng-if="child.children">
       <div class="item item-dark text-center">
         {{chil.name}} : {{chil.percentage * 100 | number : 2 }} %
       </div>
-      <div class="item-group item item-positive">
+      <div class="item-group item item-positive" ng-if="chil.children">
         <div ng-repeat="chi in chil.children">
           <div class="item item-positive">
             {{chi.name}} : {{chi.percentage * 100 | number : 2 }} %
