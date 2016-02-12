@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="ct" content="<%= ct %>">
+  <title>Speech to Text</title>
+
+  <link rel="shortcut icon" href="images/favicon.ico" />
+
+  <!-- Place js files at the end of the document, with fallbacks for CDNs -->
+  <script src="https://cdn.jsdelivr.net/g/jquery@3.0.0-beta1,angular.all@1.3.0-beta.14,bootstrap@3.3.6"></script>
+
+</head>
+
+<body>
+  <a-scene>
+    <a-camera position="0 1.8 4" cursor="fuse: true; maxDistance: 30; timeout: 500" cursor-visible="true" cursor-scale="2" cursor-color="#4CC3D9" cursor-offset="2" cursor-maxdistance="100" cursor-opacity="0.5"></a-camera>
+
+
+    <a-cube id="cube"></a-cube>
+
+    <a-cube position="0 3.5 -2" rotation="30 30 0" width="2" depth="2" height="2" color="#F16745" roughness="0.8">
+
+      <a-mouseenter scale="3 1 1" color="#FFC65D"></a-mouseenter>
+      <a-mouseenter target="#shadow" scale="3 2 2"></a-mouseenter>
+
+      <a-mouseleave scale="1 1 1" color="#F16745"></a-mouseleave>
+      <a-mouseleave target="#shadow" scale="2 2 2"></a-mouseleave>
+
+    </a-cube>
+    <div role="tabpanel" class="tab-pane">
+      <textarea readonly id="resultsJSON"></textarea>
+    </div>
+
+    <a-sky color="#ECECEC"></a-sky>
+  </a-scene>
+</body>
+
+</html>
