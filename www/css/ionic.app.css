@@ -9093,6 +9093,11 @@ a.button {
   color: white;
   background: white; }
 
+textarea {
+  resize: vertical;
+  /*will prevent resizing horizontally*/
+  margin-top: 13.14px; }
+
 .app-bg {
   background: #BA8B02;
   /* fallback for old browsers */
@@ -9115,7 +9120,7 @@ a {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-bottom: 0px; }
+  padding-bottom: 0; }
 
 .logo img {
   padding-top: 9px;
