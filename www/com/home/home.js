@@ -13,12 +13,18 @@ function HomeCtrl($interval, $http, $ionicPopup, $timeout) {
     pitch: "", // The pitch
     annotations: null, // All keywords extractable
     related: null, // All related concepts, expecting about 30 mores of them
+    product: "",
+    market: ""
   }
 
   home.getRandomIdea = function () {
     $http.jsonp('http://itsthisforthat.com/api.php?call=JSON_CALLBACK')
       .success(function (data) {
         console.log(data);
+
+        home.idea.product = data.this;
+        home.idea.market = data.that;
+
         home.idea.raw = "So, Basically, It's Like A " + data.this + " for " + data.that + ".";
         console.log(home.idea.raw);
       });
