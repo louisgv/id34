@@ -21,6 +21,27 @@ function HomeCtrl($http, $ionicLoading) {
     conceptCollection: null
   };
 
+  home.graph = {
+    conceptCollection : {
+      concepts : [] // Lots of concept chart?
+    },
+    tone : {
+      labels: [],
+      data:[]
+    },
+    personality : {
+      bigFive: {
+
+      },
+      needs: {
+
+      },
+      values: {
+
+      }
+    }
+  }
+
   home.getRandomIdea = function () {
     $http.jsonp("https://itsthisforthat.com/api.php?call=JSON_CALLBACK")
       .success(function (data) {
@@ -71,6 +92,7 @@ function HomeCtrl($http, $ionicLoading) {
         function (response) {
           console.log(response.data);
           home.idea.tone = response.data;
+
         },
         function (err) {
           console.log(err);
