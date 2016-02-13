@@ -169,8 +169,8 @@ function HomeCtrl($http, $ionicLoading) {
 
     home.getTone();
 
-    // $http.get("https://id34.mybluemix.net/ai/" + encodeURIComponent(home.idea.raw))
-    $http.get(analyzerAPI)
+    $http.get("https://id34.mybluemix.net/ai/" + encodeURIComponent(home.idea.raw))
+    // $http.get(analyzerAPI)
       .then(
         function (response) {
           console.log(response.data);
