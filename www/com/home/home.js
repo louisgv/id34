@@ -59,6 +59,7 @@ function HomeCtrl($http, $ionicLoading) {
   }
 
   function resetProfileGraph() {
+    home.graph.personality = {};
     home.graph.personality = {
       bigFive: {
         data: [],
@@ -186,7 +187,9 @@ function HomeCtrl($http, $ionicLoading) {
           $ionicLoading.hide();
         },
         function (err) {
-          console.log(err);
+          $ionicLoading.hide();
+          alert("Too vague Idea, no keywords found...");
+          return console.log(err);
         }
       );
   }
