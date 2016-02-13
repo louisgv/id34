@@ -28,24 +28,23 @@
 
     <div class="row responsive-sm">
 
-      <div class="col col-25 responsive-sm" ng-show="home.idea.related">
+      <!-- <div class="col col-25 responsive-sm" ng-show="home.idea.related">
         <span ng-include="'com/home/mods/related-concepts.html'"></span>
-      </div>
+      </div> -->
 
       <!-- <div class="col col-25 responsive-sm" ng-show="home.idea.keyData">
         <span ng-include="'com/home/mods/keywords.html'"></span>
       </div> -->
 
-      <div class="col col-50 responsive-sm" ng-show="home.idea.personality">
-        <span ng-include="'com/home/mods/personality.html'"></span>
-        <div class="row">
-          <canvas id="doughnut" class="chart chart-doughnut"
-          chart-data="home.data" chart-labels="home.labels">
-          </canvas>
-        </div>
+      <div class="col col-33 responsive-sm" ng-show="home.idea.conceptCollection">
+        <span ng-include="'com/home/mods/concepts.html'"></span>
       </div>
 
-      <div class="col col-25 responsive-sm" ng-show="home.idea.tone">
+      <div class="col col-33 responsive-sm" ng-show="home.idea.personality">
+        <span ng-include="'com/home/mods/personality.html'"></span>
+      </div>
+
+      <div class="col col-33 responsive-sm" ng-show="home.idea.tone">
         <span ng-include="'com/home/mods/tone.html'"></span>
       </div>
     </div>
