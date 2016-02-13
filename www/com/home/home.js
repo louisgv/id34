@@ -82,6 +82,14 @@ function HomeCtrl($http, $ionicLoading) {
       });
   };
 
+  function buildToneChart(toneType, tc) {
+    for(var i = 0; i < tc.tones.length; i++) {
+      toneType.labels.push(tc.tones[i].tone_name);
+      toneType.data.push((tc.tones[i].score * 100)
+        .toFixed(2));
+    }
+  }
+
   home.getTone = function () {
     resetToneGraph();
     $http.get("https://id34.mybluemix.net/pa/" + encodeURIComponent(home.idea.raw))
@@ -93,20 +101,10 @@ function HomeCtrl($http, $ionicLoading) {
           home.idea.tone = response.data;
 
           var tc = response.data.document_tone.tone_categories;
-          for(var i = 0; i < tc[0].tones.length; i++) {
-            home.graph.tone.emotion.labels.push(tc[0].tones[i].tone_name);
-            home.graph.tone.emotion.data.push((tc[0].tones[i].score * 100).toFixed(2));
-          }
 
-          for(var i = 0; i < tc[1].tones.length; i++) {
-            home.graph.tone.writing.labels.push(tc[1].tones[i].tone_name);
-            home.graph.tone.writing.data.push((tc[1].tones[i].score * 100).toFixed(2));
-          }
-
-          for(var i = 0; i < tc[2].tones.length; i++) {
-            home.graph.tone.social.labels.push(tc[2].tones[i].tone_name);
-            home.graph.tone.social.data.push((tc[2].tones[i].score * 100).toFixed(2));
-          }
+          buildToneChart(home.graph.tone.emotion, tc[0]);
+          buildToneChart(home.graph.tone.writing, tc[1]);
+          buildToneChart(home.graph.tone.social, tc[2]);
 
         },
         function (err) {
@@ -114,6 +112,7 @@ function HomeCtrl($http, $ionicLoading) {
         }
       )
   };
+
 
   home.analyzeIdea = function () {
     $ionicLoading.show({
