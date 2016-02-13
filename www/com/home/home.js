@@ -22,14 +22,24 @@ function HomeCtrl($http, $ionicLoading) {
   };
 
   home.graph = {
-    conceptCollection : {
-      concepts : [] // Lots of concept chart?
+    conceptCollection: {
+      concepts: [] // Lots of concept chart?
     },
-    tone : {
-      labels: [],
-      data:[]
+    tone: {
+      emotion: {
+        labels: [],
+        data: []
+      },
+      writing: {
+        labels: [],
+        data: []
+      },
+      social: {
+        labels: [],
+        data: []
+      }
     },
-    personality : {
+    personality: {
       bigFive: {
 
       },
@@ -38,6 +48,23 @@ function HomeCtrl($http, $ionicLoading) {
       },
       values: {
 
+      }
+    }
+  }
+
+  function resetToneGraph() {
+    home.graph.tone = {
+      emotion: {
+        labels: [],
+        data: []
+      },
+      writing: {
+        labels: [],
+        data: []
+      },
+      social: {
+        labels: [],
+        data: []
       }
     }
   }
@@ -55,43 +82,31 @@ function HomeCtrl($http, $ionicLoading) {
       });
   };
 
-  home.getRelatedConcepts = function () {
-    // $http.get("https://id34.mybluemix.net/a/" + home.idea.raw)
-    $http.get(conceptsAPI)
-      .then(
-        function (response) {
-          console.log(response.data);
-          home.idea.related = response.data;
-        },
-        function (err) {
-          console.log(err);
-        }
-      )
-  };
-
-  home.getKeywords = function () {
-    console.log("GET KEY");
-
-    // $http.get("https://id34.mybluemix.net/e/" + encodeURIComponent(home.idea.raw))
-    $http.get(keywordsAPI)
-      .then(
-        function (response) {
-          console.log(response);
-          home.idea.keyData = response.data;
-        },
-        function (err) {
-          console.log(err);
-        }
-      )
-  };
-
   home.getTone = function () {
+    resetToneGraph();
     $http.get("https://id34.mybluemix.net/pa/" + encodeURIComponent(home.idea.raw))
       .then(
         // $http.get(toneAPI)
         function (response) {
           console.log(response.data);
+
           home.idea.tone = response.data;
+
+          var tc = response.data.document_tone.tone_categories;
+          for(var i = 0; i < tc[0].tones.length; i++) {
+            home.graph.tone.emotion.labels.push(tc[0].tones[i].tone_name);
+            home.graph.tone.emotion.data.push((tc[0].tones[i].score * 100).toFixed(2));
+          }
+
+          for(var i = 0; i < tc[1].tones.length; i++) {
+            home.graph.tone.writing.labels.push(tc[1].tones[i].tone_name);
+            home.graph.tone.writing.data.push((tc[1].tones[i].score * 100).toFixed(2));
+          }
+
+          for(var i = 0; i < tc[2].tones.length; i++) {
+            home.graph.tone.social.labels.push(tc[2].tones[i].tone_name);
+            home.graph.tone.social.data.push((tc[2].tones[i].score * 100).toFixed(2));
+          }
 
         },
         function (err) {

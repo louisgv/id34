@@ -2,7 +2,7 @@
 
 <div class="card">
   <div class="item item-toggle">
-    Graph
+    Tone Raw Table
     <label class="toggle toggle-energized">
       <input type="checkbox" ng-model="showTone">
       <div class="track">
@@ -10,10 +10,8 @@
       </div>
     </label>
   </div>
-  <button ng-show="showTone" class="button button-block button-clear button-dark" ng-click="home.getRandomIdea()">
-    <i class="icon ion-refresh"></i>
-  </button>
 </div>
+
 <div ng-if="showTone" class="card idea-tone" ng-repeat="tone_category in home.idea.tone.document_tone.tone_categories">
 
   <div class="item item-divider">
