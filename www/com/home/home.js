@@ -11,6 +11,13 @@ function HomeCtrl($http, $ionicLoading) {
 
   var home = this;
 
+  home.levelLabel = [
+    "Broad",
+    "Common",
+    "Academic",
+    "Specialized"
+  ]
+
   home.idea = {
     raw: "", // Raw idea expression
     pitch: "", // The pitch
