@@ -18,6 +18,13 @@ function HomeCtrl($http, $ionicLoading) {
     "Specialized"
   ]
 
+  home.classLabel = [
+    "item-assertive",
+    "item-energized",
+    "item-balanced",
+    "item-calm"
+  ]
+
   home.idea = {
     raw: "", // Raw idea expression
     pitch: "", // The pitch

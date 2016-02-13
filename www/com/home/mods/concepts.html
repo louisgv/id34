@@ -13,8 +13,8 @@
 
 <div ng-if="show" class="idea-related" ng-repeat="entry in home.idea.conceptCollection">
 
-  <div class="item item-positive item-toggle">
-    ({{home.levelLabel[entry.level]}}) - {{entry.keyword}}
+  <div class="item item-toggle" ng-class="home.classLabel[entry.level]">
+    <b>({{home.levelLabel[entry.level]}})</b> - {{entry.keyword}}
     <label class="toggle toggle-energized">
       <input type="checkbox" ng-model="showEntry">
       <div class="track">
@@ -24,7 +24,7 @@
   </div>
 
   <div class="card" ng-if="showEntry" ng-repeat="entr in entry.concepts">
-    <div class="item item-positive item-toggle">
+    <div class="item item-toggle" ng-class="home.classLabel[entry.level]">
       {{entr.concept.label}}
       <label class="toggle toggle-dark">
         <input type="checkbox" ng-model="showDetail">
