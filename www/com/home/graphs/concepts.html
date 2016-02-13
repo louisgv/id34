@@ -6,14 +6,15 @@
   </div>
 </div>
 
-<div class="card">
-
-</div>
-
-<div class="card">
-
-</div>
-
-<div class="card">
-
+<div class="card" ng-repeat="(key, graph) in home.graph.conceptCollection">
+  <div class="item item-assertive">
+    {{key}}
+  </div>
+  <!-- <div class="item item-text-wrap">
+    {{graph}}
+  </div> -->
+  <canvas class="chart chart-polar-area" chart-data="graph.data" chart-labels="graph.labels"></canvas>
+  <!-- <canvas class="chart chart-pie"
+    chart-data="graph.data" chart-labels="graph.labels">
+  </canvas> -->
 </div>

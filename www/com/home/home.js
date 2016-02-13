@@ -36,23 +36,7 @@ function HomeCtrl($http, $ionicLoading) {
   };
 
   home.graph = {
-    conceptCollection: {
-      concepts: [] // Lots of concept chart?
-    },
-    tone: {
-      emotion: {
-        labels: [],
-        data: []
-      },
-      writing: {
-        labels: [],
-        data: []
-      },
-      social: {
-        labels: [],
-        data: []
-      }
-    },
+    conceptCollection: {},
     personality: {
       bigFive: {
 
@@ -81,6 +65,10 @@ function HomeCtrl($http, $ionicLoading) {
         data: []
       }
     }
+  }
+
+  function resetConceptGraph() {
+    home.graph.conceptCollection = {};
   }
 
   home.getRandomIdea = function () {
@@ -129,6 +117,8 @@ function HomeCtrl($http, $ionicLoading) {
 
 
   home.analyzeIdea = function () {
+    resetConceptGraph();
+
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner><br>Analyzing your possible future',
       animation: 'fade-in'
@@ -144,7 +134,30 @@ function HomeCtrl($http, $ionicLoading) {
 
           home.idea.personality = response.data.profile;
 
-          home.idea.conceptCollection = response.data.conceptCollection;
+          var cc = home.idea.conceptCollection = response.data.conceptCollection;
+
+          var hgcc = home.graph.conceptCollection;
+
+
+
+          for(var i = 0; i < cc.length; i++) {
+
+            if(!hgcc[cc[i].keyword])
+              hgcc[cc[i].keyword] = {
+                data: [],
+                labels: []
+              }
+
+            var c = cc[i].concepts;
+
+            for(var j = 0; j < c.length; j++) {
+              hgcc[cc[i].keyword].labels.push(c[j].concept.label);
+              hgcc[cc[i].keyword].data.push((c[j].score * 100)
+                .toFixed(2));
+
+            }
+            // angular.extend(hgcc[cc[i].keyword],g);
+          }
 
           $ionicLoading.hide();
         },
