@@ -35,20 +35,7 @@ function HomeCtrl($http, $ionicLoading) {
     conceptCollection: null
   };
 
-  home.graph = {
-    conceptCollection: {},
-    personality: {
-      bigFive: {
-
-      },
-      needs: {
-
-      },
-      values: {
-
-      }
-    }
-  }
+  home.graph = {}
 
   function resetToneGraph() {
     home.graph.tone = {
@@ -69,6 +56,23 @@ function HomeCtrl($http, $ionicLoading) {
 
   function resetConceptGraph() {
     home.graph.conceptCollection = {};
+  }
+
+  function resetProfileGraph() {
+    home.graph.personality = {
+      bigFive: {
+        data: [],
+        labels: []
+      },
+      needs: {
+        data: [],
+        labels: []
+      },
+      values: {
+        data: [],
+        labels: []
+      }
+    }
   }
 
   home.getRandomIdea = function () {
@@ -132,8 +136,31 @@ function HomeCtrl($http, $ionicLoading) {
     }
   }
 
+  function traceTree(node, graph) {
+    // body...
+    if(node.percentage) {
+      graph.labels.push(node.name);
+      graph.data.push((node.percentage * 100)
+        .toFixed(2));
+    }
+    if(!node.children)
+      return;
+    for(var i = 0; i < node.children.length; ++i) {
+      traceTree(node.children[i], graph);
+    }
+  }
+
+  function buildPersonalityGraph(iptc, hgp) {
+    // body...
+    traceTree(iptc[0], hgp.bigFive);
+    traceTree(iptc[1], hgp.needs);
+    traceTree(iptc[2], hgp.values);
+    // console.log(hgp);
+  }
+
   home.analyzeIdea = function () {
     resetConceptGraph();
+    resetProfileGraph();
 
     $ionicLoading.show({
       template: '<ion-spinner icon="ripple" class="spinner-energized"></ion-spinner><br>Analyzing your possible future',
@@ -154,7 +181,7 @@ function HomeCtrl($http, $ionicLoading) {
 
           makeConceptGraph(home.idea.conceptCollection);
 
-
+          buildPersonalityGraph(home.idea.personality.tree.children, home.graph.personality);
 
           $ionicLoading.hide();
         },
